@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ceezix — GitHub Profile Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0D1117;
+    --surface: #161B22;
+    --border: #30363D;
+    --text: #C9D1D9;
+    --muted: #8B949E;
+    --accent: #00FF88;
+    --white: #F0F6FC;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    padding: 48px 0 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .ascii {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(7px, 1.6vw, 13px);
+    color: var(--accent);
+    line-height: 1.2;
+    letter-spacing: 0;
+    display: inline-block;
+    margin-bottom: 20px;
+    white-space: pre;
+  }
+
+  .tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .badge-node   { background: #1a3a1a; color: #339933; border: 1px solid #339933; }
+  .badge-express{ background: #1a1a1a; color: #888; border: 1px solid #444; }
+  .badge-react  { background: #0d1f2d; color: #61DAFB; border: 1px solid #61DAFB44; }
+  .badge-vite   { background: #1a1a2e; color: #646CFF; border: 1px solid #646CFF44; }
+  .badge-js     { background: #2a2400; color: #F7DF1E; border: 1px solid #F7DF1E44; }
+  .badge-pnpm   { background: #2a1a00; color: #F69220; border: 1px solid #F6922044; }
+
+  /* ── Sections ── */
+  .section {
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  h2::before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  p { color: var(--text); margin-bottom: 12px; }
+
+  /* ── Principles ── */
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .principle {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 16px 18px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .principle-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .principle p { font-size: 13px; color: var(--muted); margin: 0; }
+
+  /* ── Code block ── */
+  .code-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text);
+    overflow-x: auto;
+    line-height: 1.8;
+    margin-top: 16px;
+  }
+
+  .code-block .dir { color: var(--accent); }
+  .code-block .arrow { color: var(--muted); }
+  .code-block .comment { color: #8B949E; font-style: italic; }
+
+  /* ── Capabilities table ── */
+  .cap-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+
+  .cap-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-align: left;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cap-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+
+  .cap-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .cap-table td:last-child { color: var(--muted); }
+  .cap-table tr:last-child td { border-bottom: none; }
+  .cap-table tr:hover td { background: var(--surface); }
+
+  /* ── Module cards ── */
+  .modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .module-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+
+  .module-card:hover { border-color: var(--accent); }
+
+  .module-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+
+  .module-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .module-repo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+
+  .module-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── Vision timeline ── */
+  .timeline {
+    margin-top: 16px;
+    position: relative;
+    padding-left: 24px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -21px;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--void);
+  }
+
+  .timeline-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .timeline-desc { font-size: 14px; color: var(--muted); }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .footer-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .accent { color: var(--accent); }
+
+  /* Scanline animation */
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  .scanline {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(transparent, rgba(0,255,136,0.04), transparent);
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--accent);
+    animation: pulse 1s ease-in-out infinite;
+    vertical-align: text-bottom;
+    margin-left: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <pre class="ascii"> ██████╗███████╗███████╗███████╗██╗██╗  ██╗
+██╔════╝██╔════╝██╔════╝╚══███╔╝██║╚██╗██╔╝
+██║     █████╗  █████╗    ███╔╝ ██║ ╚███╔╝ 
+██║     ██╔══╝  ██╔══╝   ███╔╝  ██║ ██╔██╗ 
+╚██████╗███████╗███████╗███████╗██║██╔╝ ██╗
+ ╚═════╝╚══════╝╚══════╝╚══════╝╚═╝╚═╝  ╚═╝</pre>
+
+    <div class="tagline">AI Systems · Automation · Developer Tools<span class="cursor"></span></div>
+
+    <div class="badges">
+      <span class="badge badge-node">Node.js</span>
+      <span class="badge badge-express">Express</span>
+      <span class="badge badge-react">React</span>
+      <span class="badge badge-vite">Vite</span>
+      <span class="badge badge-js">JavaScript</span>
+      <span class="badge badge-pnpm">PNPM</span>
+    </div>
+  </div>
+
+  <!-- About -->
+  <div class="section">
+    <h2>What is Ceezix?</h2>
+    <p>Ceezix is a modular AI-driven development platform — not a single app, but a growing ecosystem of intelligent systems built for developers who move fast and build differently.</p>
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-title">Automation First</div>
+        <p>Every repetitive workflow is a candidate for elimination.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-title">Modular by Design</div>
+        <p>Each system is independently deployable, composable at scale.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-title">Intelligence at Core</div>
+        <p>AI is not a feature. It is the foundation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Architecture -->
+  <div class="section">
+    <h2>Architecture</h2>
+    <div class="code-block">
+<span class="dir">ceezix/</span>
+├── <span class="dir">apps/</span>
+│   ├── <span class="dir">api/</span>     <span class="arrow">→</span>  <span class="comment">Express backend — AI services, automation, APIs</span>
+│   └── <span class="dir">web/</span>     <span class="arrow">→</span>  <span class="comment">React (Vite) — developer interface and dashboards</span>
+├── <span class="dir">packages/</span>
+│   ├── <span class="dir">core/</span>    <span class="arrow">→</span>  <span class="comment">Shared logic, utilities, AI abstractions</span>
+│   └── <span class="dir">config/</span>  <span class="arrow">→</span>  <span class="comment">Unified configuration layer</span>
+└── <span class="dir">tools/</span>       <span class="arrow">→</span>  <span class="comment">CLI utilities, build scripts, network tooling</span>
+    </div>
+  </div>
+
+  <!-- Capabilities -->
+  <div class="section">
+    <h2>Core Capabilities</h2>
+    <table class="cap-table">
+      <thead>
+        <tr><th>Domain</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>AI Systems</td><td>Inference pipelines, prompt engineering layers, model integrations</td></tr>
+        <tr><td>Automation</td><td>Workflow engines, scheduled task runners, event-driven triggers</td></tr>
+        <tr><td>API Layer</td><td>RESTful services with structured response contracts and auth</td></tr>
+        <tr><td>Dev Tooling</td><td>CLI utilities, scaffolding tools, environment configuration</td></tr>
+        <tr><td>Network Ops</td><td>Custom scripting for bandwidth, routing, and performance optimization</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modules -->
+  <div class="section">
+    <h2>Featured Modules</h2>
+    <div class="modules">
+      <div class="module-card">
+        <div class="module-label">Backend</div>
+        <div class="module-name">⚡ API Engine</div>
+        <div class="module-repo">ceezix-api</div>
+        <div class="module-desc">Handles all AI service routing, automation job execution, and external integrations. Built on Express with a structured middleware pipeline.</div>
+      </div>
+      <div class="module-card">
+        <div class="module-label">Frontend</div>
+        <div class="module-name">🖥 UI Dashboard</div>
+        <div class="module-repo">ceezix-web</div>
+        <div class="module-desc">React interface for monitoring, configuration, and interacting with Ceezix systems. Built with Vite for instant feedback loops.</div>
+      </div>
+      <div class="module-card">
+        <div class="module-label">Infrastructure</div>
+        <div class="module-name">🌐 Network Engine</div>
+        <div class="module-repo">ceezix-net</div>
+        <div class="module-desc">Low-level network tooling and optimization scripts. DNS, bandwidth management, connection profiling — built for real environments.</div>
+      </div>
+      <div class="module-card">
+        <div class="module-label">Intelligence</div>
+        <div class="module-name">🧠 AI Core</div>
+        <div class="module-repo">ceezix-core</div>
+        <div class="module-desc">Abstractions over AI models, prompt lifecycle management, response parsing, and context handling across all Ceezix modules.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vision -->
+  <div class="section">
+    <h2>Vision</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-desc">Core platform — API engine, Web dashboard, AI abstraction layer</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2026</div>
+        <div class="timeline-desc">Automation ecosystem, CLI suite, network tooling, public SDK</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2027</div>
+        <div class="timeline-desc">Mobile overlays, AI terminal OS, distributed agent framework</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-tagline">Building the infrastructure for how developers will work next.</div>
+    <div class="footer-sub"><span class="accent">Ceezix</span> · AI Systems Engineering · Built different.</div>
+  </div>
+
+</div>
+</body>
+</html>
